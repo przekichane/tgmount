@@ -95,11 +95,12 @@ class TelegramFsAsync(pyfuse3.Operations):
 
         self._inodes = list(self._files.keys())
 
-    def add_file(self, msg: Message, doc: DocumentHandle):
-        self.add_file_no_update_index(msg, doc)
+    def add_file(self, msg: Message, doc: DocumentHandle) -> TgfsFile:
+        f = self.add_file_no_update_index(msg, doc)
         self.update_index()
+        return f
 
-    def add_file_no_update_index(self, msg: Message, doc: DocumentHandle):
+    def add_file_no_update_index(self, msg: Message, doc: DocumentHandle) -> TgfsFile:
         inode = self._last_inode + 1
 
         attrs = create_attributes_from_doc(doc.document, inode)
@@ -107,6 +108,7 @@ class TelegramFsAsync(pyfuse3.Operations):
 
         self._files[inode] = new_file
         self._last_inode = inode
+        return new_file
 
     @exception_handler
     async def getattr(self, inode: int, ctx=None):
@@ -167,7 +169,7 @@ class TelegramFsAsync(pyfuse3.Operations):
 
     @exception_handler
     async def read(self, fh, off, size):
-        logvfs.debug("read(fh=%s,off=%s,size=%s). totoal: %s; " %
+        logvfs.debug("read(fh=%s,off=%s,size=%s). total: %s; " %
                      (fh, off, size, off + size))
 
         dh = self._files[fh].handle

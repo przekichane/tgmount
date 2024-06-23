@@ -1,6 +1,5 @@
 import getpass
 import logging
-from random import random
 from typing import Dict, Optional, List, Tuple
 
 from telethon import TelegramClient
