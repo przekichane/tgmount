@@ -21,6 +21,7 @@ ADD         requirements.txt .
 
 RUN         apk add --no-cache \
               fuse3=${FUSE3_VERSION} \
+              libgcc=${GCC_VERSION} \
             && \
             sed -i 's/#user_allow_other/user_allow_other/g' /etc/fuse.conf && \
             apk add --no-cache --virtual .build-deps \
