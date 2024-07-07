@@ -16,5 +16,9 @@
       "groupName": "OS Packages"
     }
   ],
+  "ignoreDeps": [
+    "ghcr.io/juniorjpdj/tgmount",
+    "ghcr.io/nktknshn/tgmount"
+  ],
   "forkProcessing": "enabled"
 }
