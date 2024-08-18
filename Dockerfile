@@ -15,11 +15,15 @@ ARG         CARGO_VERSION="1.78.0-r0"
 # renovate: datasource=repology depName=alpine_3_20/fuse3 versioning=loose
 ARG         FUSE3_VERSION="3.16.2-r0"
 
+ARG         TARGETPLATFORM
+
 WORKDIR     /app
 
 ADD         requirements.txt .
 
-RUN         apk add --no-cache \
+RUN         --mount=type=cache,sharing=locked,target=/root/.cache,id=home-cache-$TARGETPLATFORM \
+            --mount=type=cache,sharing=locked,target=/root/.cargo,id=home-cargo-$TARGETPLATFORM \
+            apk add --no-cache \
               fuse3=${FUSE3_VERSION} \
               libgcc=${GCC_VERSION} \
             && \
@@ -35,7 +39,7 @@ RUN         apk add --no-cache \
             && \
             pip install -r requirements.txt && \
             apk del .build-deps && \
-            rm -rf /root/.cache /root/.cargo
+            chown -R nobody:nogroup /app
 
 COPY        --chown=nobody:nogroup tgmount .
 
