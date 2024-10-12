@@ -8,8 +8,6 @@ ARG         BUILD_BASE_VERSION="0.5-r3"
 ARG         LIBFFI_VERSION="3.4.6-r0"
 # renovate: datasource=repology depName=alpine_3_20/libretls-dev versioning=loose
 ARG         LIBRETLS_VERSION="3.7.0-r2"
-# renovate: datasource=repology depName=alpine_3_20/sqlite-dev versioning=loose
-ARG         SQLITE_VERSION="3.45.3-r1"
 # renovate: datasource=repology depName=alpine_3_20/cargo versioning=loose
 ARG         CARGO_VERSION="1.78.0-r0"
 # renovate: datasource=repology depName=alpine_3_20/fuse3 versioning=loose
@@ -34,7 +32,6 @@ RUN         --mount=type=cache,sharing=locked,target=/root/.cache,id=home-cache-
               libffi-dev=${LIBFFI_VERSION} \
               libretls-dev=${LIBRETLS_VERSION} \
               fuse3-dev=${FUSE3_VERSION} \
-              sqlite-dev=${SQLITE_VERSION} \
               cargo=${CARGO_VERSION} \
             && \
             pip install -r requirements.txt && \
