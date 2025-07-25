@@ -4,7 +4,6 @@ import asyncio
 import logging
 import os
 import sys
-import traceback
 from argparse import ArgumentParser
 
 import pyfuse3
@@ -173,9 +172,9 @@ if __name__ == '__main__':
     try:
         asyncio.run(main())
     except KeyboardInterrupt:
-        print("Bye")
-    except Exception:
-        print(traceback.format_exc())
+        logging.info("Bye!")
+    except Exception as e:
+        logging.exception(e)
     finally:
         if unmount_required:
             pyfuse3.close(unmount=True)
