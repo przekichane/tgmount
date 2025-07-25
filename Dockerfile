@@ -35,6 +35,7 @@ RUN         --mount=type=cache,sharing=locked,target=/root/.cache,id=home-cache-
               cargo=${CARGO_VERSION} \
             && \
             uv sync --frozen && \
+            chown -R nobody:nogroup $HOME/.cache/uv && \
             apk del .build-deps && \
             chown -R nobody:nogroup /app
 
