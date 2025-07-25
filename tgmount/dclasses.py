@@ -1,7 +1,7 @@
 import mimetypes
 from dataclasses import dataclass
 from datetime import datetime
-from typing import Callable, Any, Optional
+from typing import Callable, Optional
 
 import pyfuse3
 from telethon.tl.custom import Message

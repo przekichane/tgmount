@@ -47,4 +47,4 @@ STOPSIGNAL  SIGINT
 HEALTHCHECK --interval=5m --timeout=1m --start-period=2m --retries=5 \
     CMD mountpoint -q /app/data/mnt
 
-ENTRYPOINT  [ "uv", "run", "../tgmount.py" ]
+ENTRYPOINT  [ "uv", "run", "-m", "tgmount" ]

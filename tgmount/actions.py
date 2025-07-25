@@ -12,9 +12,9 @@ from telethon.tl import types
 from telethon.utils import get_display_name
 from tqdm import tqdm
 
-from .tgclient import TelegramFsClient
-from .tgvfs import TelegramFsAsync
-from .util import DateTimeEncoder
+from tgmount.tgclient import TelegramFsClient
+from tgmount.tgvfs import TelegramFsAsync
+from tgmount.util import DateTimeEncoder
 
 
 async def list_dialogs(client: TelegramFsClient, limit=None, json_output=False, offset_id=0):

@@ -6,7 +6,7 @@ import traceback
 from typing import Dict
 
 import pyfuse3
-from funcy import *
+from funcy import walk_keys
 
 from tgmount.dclasses import TgmountDocument, DocumentHandle, TgfsFile
 from telethon.tl.custom import Message
