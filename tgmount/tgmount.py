@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+import argparse
 import asyncio
 import logging
 import os
@@ -90,7 +91,9 @@ async def main():
 def parse_args():
     '''Parse command line'''
 
-    parser = ArgumentParser()
+    parser = ArgumentParser(
+        formatter_class=argparse.ArgumentDefaultsHelpFormatter
+    )
 
     parser.add_argument('--id', default=None,
                         required='--mount' in sys.argv
@@ -119,17 +122,17 @@ def parse_args():
                         help='comma separated list of document IDs')
 
     parser.add_argument('--all-files', action='store_true', default=False,
-                        help='Retrieve all type of files, not only audio files. Default: no')
+                        help='Retrieve all type of files, not only audio files')
 
     parser.add_argument('--no-updates', action='store_true', default=False,
-                        help='don\'t listen for new files. Default: no')
+                        help='don\'t listen for new files')
 
     parser.add_argument('--reverse', action='store_true', default=False,
-                        help='documents will be searched in reverse order (from oldest to newest). Default: from newest to oldest')
+                        help='documents will be searched in reverse order (from oldest to newest)')
 
     parser.add_argument('--limit', default=None,
                         type=int,
-                        help='limit number of documents or dialogs. default: unlimited')
+                        help='limit number of documents or dialogs')
 
     parser.add_argument('--offset-id',
                         type=int,
@@ -139,10 +142,10 @@ def parse_args():
     # misc
 
     parser.add_argument('--session', type=str, default="tgfs",
-                        help='telegram session name. Default: tgfs')
+                        help='telegram session name')
 
     parser.add_argument('--fsname', type=str, default="tgfs",
-                        help='VFS name. Default: tgfs')
+                        help='VFS name')
 
     parser.add_argument('--socks', default=None,
                         help='SOCKS5 proxy i.e. 127.0.0.1:9050', type=proxy_arg)
@@ -157,7 +160,7 @@ def parse_args():
                         help='enable FUSE debugging output')
 
     parser.add_argument('--json', action='store_true', default=False,
-                        help='json output. Default: no')
+                        help='json output')
 
     parser.add_argument('--fuse-options', action='append', default=None,
                         help='pass FUSE options to FUSE when mounting', type=str)
