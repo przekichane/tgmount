@@ -17,6 +17,8 @@ ARG         TARGETPLATFORM
 
 WORKDIR     /app
 
+ENV         UV_CACHE_DIR /app/.cache/uv
+
 ADD         .python-version pyproject.toml uv.lock /app/
 
 RUN         --mount=type=cache,sharing=locked,target=/root/.cache,id=home-cache-$TARGETPLATFORM \
@@ -34,11 +36,13 @@ RUN         --mount=type=cache,sharing=locked,target=/root/.cache,id=home-cache-
               fuse3-dev=${FUSE3_VERSION} \
               cargo=${CARGO_VERSION} \
             && \
+            mkdir -p /app/.cache/uv && \
             uv sync --frozen && \
             apk del .build-deps && \
             chown -R nobody:nogroup /app
 
 COPY        --chown=nobody:nogroup tgmount .
+
 
 USER        nobody
 WORKDIR     /app/data
