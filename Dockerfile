@@ -17,7 +17,7 @@ ARG         TARGETPLATFORM
 
 WORKDIR     /app
 
-ADD         requirements.txt .
+ADD         .python-version pyproject.toml uv.lock /app/
 
 RUN         --mount=type=cache,sharing=locked,target=/root/.cache,id=home-cache-$TARGETPLATFORM \
             --mount=type=cache,sharing=locked,target=/root/.cargo,id=home-cargo-$TARGETPLATFORM \
