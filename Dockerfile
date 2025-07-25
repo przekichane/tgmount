@@ -1,4 +1,4 @@
-FROM        python:3.13.5-alpine@sha256:37b14db89f587f9eaa890e4a442a3fe55db452b69cca1403cc730bd0fbdc8aaf
+FROM        ghcr.io/astral-sh/uv:0.8.3-python3.13-alpine@sha256:99ce5a7ebcf37cec9d8df603d816d13e2508401a13df9a8d35598b665ae25b3c 
 
 # renovate: datasource=repology depName=alpine_3_22/gcc versioning=loose
 ARG         GCC_VERSION="14.2.0-r6"
@@ -34,7 +34,7 @@ RUN         --mount=type=cache,sharing=locked,target=/root/.cache,id=home-cache-
               fuse3-dev=${FUSE3_VERSION} \
               cargo=${CARGO_VERSION} \
             && \
-            pip install -r requirements.txt && \
+            uv sync --frozen && \
             apk del .build-deps && \
             chown -R nobody:nogroup /app
 
@@ -47,4 +47,4 @@ STOPSIGNAL  SIGINT
 HEALTHCHECK --interval=5m --timeout=1m --start-period=2m --retries=5 \
     CMD mountpoint -q /app/data/mnt
 
-ENTRYPOINT  [ "python", "../tgmount.py" ]
+ENTRYPOINT  [ "uv", "run", "../tgmount.py" ]

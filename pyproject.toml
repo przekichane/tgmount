@@ -1,0 +1,14 @@
+[project]
+name = "tgmount"
+version = "0.0.0"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "aiohttp[speedups]==3.12.14",
+    "cryptg==0.5.0.post0",
+    "funcy==2.0.0",
+    "pyfuse3==3.4.0",
+    "pysocks==1.7.1",
+    "telethon==1.40.0",
+    "tqdm==4.67.1",
+]
