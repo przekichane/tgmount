@@ -41,7 +41,7 @@ RUN         --mount=type=cache,sharing=locked,target=/root/.cache,id=home-cache-
             apk del .build-deps && \
             chown -R nobody:nogroup /app
 
-COPY        --chown=nobody:nogroup tgmount .
+COPY        --chown=nobody:nogroup tgmount ./tgmount/
 
 
 USER        nobody
