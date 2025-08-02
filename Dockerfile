@@ -17,7 +17,7 @@ ARG         TARGETPLATFORM
 
 WORKDIR     /app
 
-ENV         UV_CACHE_DIR /app/.cache/uv
+ENV         UV_CACHE_DIR="/app/.cache/uv"
 
 ADD         .python-version pyproject.toml uv.lock /app/
 
@@ -45,7 +45,6 @@ COPY        --chown=nobody:nogroup tgmount .
 
 
 USER        nobody
-WORKDIR     /app/data
 STOPSIGNAL  SIGINT
 
 HEALTHCHECK --interval=5m --timeout=1m --start-period=2m --retries=5 \

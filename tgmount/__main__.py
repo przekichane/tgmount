@@ -141,7 +141,7 @@ def parse_args():
 
     # misc
 
-    parser.add_argument('--session', type=str, default="tgfs",
+    parser.add_argument('--session', type=str, default="./data/tgfs",
                         help='telegram session name')
 
     parser.add_argument('--fsname', type=str, default="tgfs",
